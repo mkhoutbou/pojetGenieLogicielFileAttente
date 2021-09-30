@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class CheckingBox extends Client implements Box {
@@ -13,7 +12,7 @@ public class CheckingBox extends Client implements Box {
             String argument = "continue";
             Scanner scanner = new Scanner(System.in);
             sendMessageWithoutStack("checker");
-            System.out.print("Donner le numero du Caisse : ");
+            System.out.print("Donner le numero de Caisse : ");
             argument = scanner.nextLine();
             String response = sendMessage(argument);
             System.out.println(response);
