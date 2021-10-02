@@ -82,7 +82,7 @@
             <archive>
               <manifest>
                 <addClasspath>true</addClasspath>
-                <mainClass>com.file_attente.App</mainClass>
+                <mainClass>com.file_attente.QueueMenager</mainClass>
               </manifest>
             </archive>
           </configuration>
@@ -107,15 +107,12 @@
               <jar>target/file-d-attente-0.1.0.jar</jar>
               <errTitle>file-d-attente</errTitle>
               <classPath>
-                <mainClass>com.file_attente.App</mainClass>
+                <mainClass>com.file_attente.QueueMenager</mainClass>
                 <addDependencies>false</addDependencies>
                 <preCp>anything</preCp>
               </classPath>
               <jre>
                 <minVersion>1.5.0</minVersion>
-                <!-- <opts>
-                  <opt>-Djava.endorsed.dirs=./endorsed</opt>
-                </opts> -->
               </jre>
               <versionInfo>
                 <fileVersion>1.2.3.4</fileVersion>

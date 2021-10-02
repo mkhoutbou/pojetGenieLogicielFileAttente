@@ -17,30 +17,57 @@ public class MonitoringBox implements Box {
     private static int queuHead = 0; // la position courrente des appels
 
     @Override
-    public void start() {
-        System.out.println("Bienvenu, Ici s'affiche les numero Appele");
+    public void start() { // tout boxe doit avoir cette methode
+
         try {
-            serverSocket = new ServerSocket(PORT);
+
+            serverSocket = new ServerSocket(PORT); // ce constructeur de ServerSocket permet l'application d'ecouter sous un port ..
+
+            System.out.println("");
+            System.out.println(".##############################################################.");
+            System.out.println("|##############################################################|");
+            System.out.println("|##############|                                |##############|");
+            System.out.println("|##############|  Gestionnaire File d'attente   |##############|");
+            System.out.println("|##############|           (Moniteur)           |##############|");
+            System.out.println("|##############################################################|");
+            System.out.println("*##############################################################*");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("      Developpé par Mouhamed Khoutbou Thiam(77 430 90 04)       ");
+            System.out.println("----------------------------------------------------------------");
+            System.out.println("");
+            System.out.println("           L'application est bien lancée au PORT 6666           ");
+            System.out.println("");
+            System.out.println("");
+
             // ici on demare une nouveau thread a chaque nouvelle connection
             while (true) new ClientHandler(serverSocket.accept()).start();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        } catch (IOException e) { // en cas d'erreur
+
+            System.out.println("");
+            System.out.println("");
+            System.out.println("Le Moniteur est deja lancée dans cette machine ou que le PORT 6666 est occupé !!!");
+
         }
     }
 
+    // Arreter d'ecouter et toutes les connexion
     public void stop() throws IOException {
         serverSocket.close();
     }
 
+    // cette sous classe permet de creer de nouvelle threads pour donner la possibité de multiple connexion
     private static class ClientHandler extends Thread {
         private Socket clientSocket;
-        private PrintWriter out;
-        private BufferedReader in;
+        private PrintWriter out; // permet d'envoier un message
+        private BufferedReader in; // permet de recevoir un message
 
         public ClientHandler(Socket socket) {
             this.clientSocket = socket;
         }
 
+        // c'est cette methode qui sera executéme par le thread 
         public void run() {
 
             try {
@@ -49,37 +76,41 @@ public class MonitoringBox implements Box {
                 in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 String ticketChecking = in.readLine();
 
-                if (ticketChecking.equals("ticket")) {
+                if (ticketChecking.equals("ticket")) { // execution pour recuperation de ticket
 
                     out.println("Bienvenu , vous etes bien connecte ");
 
-                    while (!"exit".equals(in.readLine())) {
+                    while (!"exit".equals(in.readLine())) { // un message "exit" permet d'arreter le thread
 
                         queuTop++;
-                        out.println("ticket numero T_" + queuTop);
+                        out.println("|| ticket : << " + queuTop + " >> ||");
 
                     }
 
-                } else {
+                } else { // execution pour l'appele du suivant
 
                     String checkerNumber = in.readLine();
-                    out.println("Bienvenu , vous etes bien connecte : caisse numero G_" + checkerNumber);
+                    out.println("Bienvenu , vous etes bien connecte : Guichet numero " + checkerNumber);
 
-                    while (!"exit".equals(in.readLine())) {
+                    while (!"exit".equals(in.readLine())) { // un message "exit" permet d'arreter le thread
 
-                        if (queuTop <= queuHead)
+                        if (queuTop <= queuHead) // verification s'il quel qu'un en attente
                             out.println("IL n'y a personne en attente");
                         else {
                             queuHead++;
-                            out.println("Numero T_" + queuHead);
-                            System.out.println("Numero T_" + queuHead + " est appele au guichet Numero G_" + checkerNumber);
+                            out.println("|| Numero : << " + queuHead + " >> ||");
+                            System.out.println("");
+                            System.out.println("      || Numero : << " + queuHead + " >> ||     *     || Guichet : << " + checkerNumber + " >> ||");
+                            System.out.println("");
+                            System.out.println("  ----------------------------------------------------------------");
+
                         }
 
                     }
 
                 }
 
-                out.println("Bye Bye");
+                out.println("Bye Bye"); 
                 in.close();
                 out.close();
                 clientSocket.close();
