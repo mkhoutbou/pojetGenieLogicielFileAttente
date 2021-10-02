@@ -1,4 +1,4 @@
-
+package com.file_attente;
 // ici on a appliquer le design patter factory. BoxFactory.getBox retourne un box selon le context (type de box)
 public class BoxFactory {
     public static final String CHECKING = "Checking";

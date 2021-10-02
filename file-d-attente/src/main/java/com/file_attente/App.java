@@ -1,8 +1,7 @@
-
-
+package com.file_attente;
 import java.io.IOException;
 import java.net.UnknownHostException;
-public class QueueMenager {
+public class App {
     public static void main(String[] args) throws UnknownHostException, IOException {
 
         String choise = args[0];

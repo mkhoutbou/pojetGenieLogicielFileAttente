@@ -1,0 +1,9 @@
+com\file_attente\QueueMenager.class
+com\file_attente\CheckingBox.class
+com\file_attente\BoxFactory.class
+com\file_attente\MonitoringBox.class
+com\file_attente\TicketBox.class
+com\file_attente\Box.class
+com\file_attente\App.class
+com\file_attente\MonitoringBox$ClientHandler.class
+com\file_attente\Client.class
