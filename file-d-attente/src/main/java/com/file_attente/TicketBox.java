@@ -59,5 +59,10 @@ public class TicketBox extends Guest implements Box {
         }
         
     }
+
+    @Override
+    public void stop() {
+        
+    }
     
 }

@@ -52,9 +52,13 @@ public class MonitoringBox implements Box {
         }
     }
 
-    // Arreter d'ecouter et toutes les connexion
-    public void stop() throws IOException {
-        serverSocket.close();
+    @Override
+    public void stop() {
+        try {
+            serverSocket.close();
+        } catch (IOException e) {
+            
+        }  
     }
 
     // cette sous classe permet de creer de nouvelle threads pour donner la possibité de multiple connexion

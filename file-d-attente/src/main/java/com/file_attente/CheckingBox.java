@@ -65,4 +65,9 @@ public class CheckingBox extends Guest implements Box {
         }
     }
 
+    @Override
+    public void stop() {
+        
+    }
+
 }
